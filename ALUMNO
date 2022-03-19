@@ -1,0 +1,93 @@
+Crea variables y precarga imágenes en sketch.js.
+Crea 3 variables globales obstacle1Image y obstacle2Image para cargar imágenes y obstáculos para crear un grupo.
+Utiliza preload() para cargar imágenes para obstacle1Image y obstacle2Image.
+ 
+ 
+ Similar a las monedas y el combustible, crearemos un grupo de obstáculos y agregaremos varios grupos de obstáculos en eso.
+ En game.js y crea un nuevo grupo en el método start().
+ 
+ Ahora, podemos usar nuestro método addSprite() para crear sprites en posiciones específicas para los obstáculos.
+Utiliza addSprites() para crear obstáculos y agrégalos al grupo;
+Modifica addSprites() para agregar el parámetro de posición.
+
+Modifica el código en addSpites() para mostrar los obstáculos, verificar la longitud de la posición, asignar imágenes y agregarlas al grupo.
+Cuando no hay posición, se ejecutará el código para darles una posición aleatoria a las monedas y combustible.
+
+Ahora, en la parte final de la clase de hoy, debemos eliminar ese sprite del grupo una vez que el auto toque la moneda o el tanque de combustible
+La ventaja de usar la función overlap() sobre la función isTouching() o collide() es que si el objetivo es un grupo de sprites, 
+la función recorrerá para verificar si cada sprite se superpone
+
+Crea las funciones handleFuel() y handlePowerCoins en game.js
+
+en la función play() llama a las funciones anteriores. Necesitamos saber qué auto del jugador está tocando la moneda o el tanque de combustible. 
+Entonces necesitamos pasar el índice a estas funciones.
+ 
+ obstacles = new Group();
+ 
+ 
+ 
+ var obstacle1Image, obstacle2Image; 
+ 
+  handlePowerCoins(index) {
+    cars[index - 1].overlap(powerCoins, function(collector, collected) {
+      player.score += 21;
+      player.update();
+      //recolectado el sprite en el grupo de recolectables que desencadenan
+      //el evento
+      collected.remove();
+    });
+  }
+}
+ 
+ 
+ this.handleFuel(index);
+ this.handlePowerCoins(index);
+ 
+ 
+ this.addSprites(obstacles,obstaclesPositions.length,obstacle1Image,0.04,obstaclesPositions);
+ 
+ powerCoinImage = loadImage("./assets/goldCoin.png");
+  obstacle1Image = loadImage("./assets/obstacle1.png");
+  obstacle2Image = loadImage("./assets/obstacle2.png");
+  
+  
+  if (positions.length > 0) {
+        x = positions[i].x;
+        y = positions[i].y;
+        spriteImage = positions[i].image;
+      } else {
+        x = random(width / 2 + 150, width / 2 - 150);
+        y = random(-height * 4.5, height - 400);
+      }
+ 
+ 
+ Con muchas pruebas y errores, ya hemos colocado cada obstáculo en posiciones fijas. 
+ Después de la clase, puedes cambiar el valor de x e y para experimentar con sus posiciones.
+
+ var obstaclesPositions = [
+      { x: width / 2 + 250, y: height - 800, image: obstacle2Image },
+      { x: width / 2 - 150, y: height - 1300, image: obstacle1Image },
+      { x: width / 2 + 250, y: height - 1800, image: obstacle1Image },
+      { x: width / 2 - 180, y: height - 2300, image: obstacle2Image },
+      { x: width / 2, y: height - 2800, image: obstacle2Image },
+      { x: width / 2 - 180, y: height - 3300, image: obstacle1Image },
+      { x: width / 2 + 180, y: height - 3300, image: obstacle2Image },
+      { x: width / 2 + 250, y: height - 3800, image: obstacle2Image },
+      { x: width / 2 - 150, y: height - 4300, image: obstacle1Image },
+      { x: width / 2 + 250, y: height - 4800, image: obstacle2Image },
+      { x: width / 2, y: height - 5300, image: obstacle1Image },
+      { x: width / 2 - 180, y: height - 5500, image: obstacle2Image }
+    ];
+    
+    handleFuel(index) {
+    // Agregando combustible
+    cars[index - 1].overlap(fuels, function(collector, collected) {
+      player.fuel = 185;
+      //recolectado el sprite en el grupo de recolectables que desencadenan
+      //el evento
+      collected.remove();
+    });
+  }
+    
+    
+    addSprites(spriteGroup, numberOfSprites, spriteImage, scale, positions = [])
